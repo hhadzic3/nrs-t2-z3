@@ -22,4 +22,11 @@ CREATE TABLE IF NOT EXISTS `drzava` (
 INSERT INTO `drzava` VALUES (1,'Francuska',1);
 INSERT INTO `drzava` VALUES (2,'Velika Britanija',2);
 INSERT INTO `drzava` VALUES (3,'Austrija',3);
+CREATE TABLE IF NOT EXISTS `Znamenitost` (
+      `id`	INTEGER,
+      `naziv`	TEXT,
+      `grad_id`	INTEGER,
+      FOREIGN KEY(`grad_id`) REFERENCES `grad`,
+      PRIMARY KEY(`id`)
+);
 COMMIT;

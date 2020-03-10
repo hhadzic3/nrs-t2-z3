@@ -5,6 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -15,6 +18,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class GradController {
     public TextField fieldNaziv;
@@ -27,6 +32,31 @@ public class GradController {
     public GradController(Grad grad, ArrayList<Drzava> drzave) {
         this.grad = grad;
         listDrzave = FXCollections.observableArrayList(drzave);
+    }
+
+    public void otvoriZ(ActionEvent actionEvent) {
+        /*Stage stage = new Stage();
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/znamenitosti.fxml"));
+            DrzavaController drzavaController = new DrzavaController(null, dao.gradovi());
+            loader.setController(drzavaController);
+            root = loader.load();
+            stage.setTitle("Država");
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setResizable(true);
+            stage.show();
+
+            stage.setOnHiding( event -> {
+                Drzava drzava = drzavaController.getDrzava();
+                if (drzava != null) {
+                    dao.dodajDrzavu(drzava);
+                    listGradovi.setAll(dao.gradovi());
+                }
+            } );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
     }
 
     @FXML
@@ -103,16 +133,13 @@ public class GradController {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                     if (!json.equals("OK")) {
                         Platform.runLater(() -> {
                             fieldPostanskiBroj.getStyleClass().removeAll("poljeProvjeraUToku");
                             fieldPostanskiBroj.getStyleClass().add("poljeNijeIspravno");
                             return;
                         });
-
                     } else {
-
                         Platform.runLater(() -> {
                             fieldPostanskiBroj.getStyleClass().removeAll("poljeProvjeraUToku");
                             fieldPostanskiBroj.getStyleClass().add("poljeIspravno");
@@ -130,8 +157,5 @@ public class GradController {
                 // Do nothing
             }
         }
-
-
-
     }
 }
