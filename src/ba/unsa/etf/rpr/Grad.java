@@ -5,12 +5,22 @@ public class Grad {
     private String naziv;
     private int brojStanovnika;
     private Drzava drzava;
+    private int postanskiBroj;
 
-    public Grad(int id, String naziv, int brojStanovnika, Drzava drzava) {
+    public int getPostanskiBroj() {
+        return postanskiBroj;
+    }
+
+    public void setPostanskiBroj(int postanskiBroj) {
+        this.postanskiBroj = postanskiBroj;
+    }
+
+    public Grad(int id, String naziv, int brojStanovnika, Drzava drzava , int postanskiBroj) {
         this.id = id;
         this.naziv = naziv;
         this.brojStanovnika = brojStanovnika;
         this.drzava = drzava;
+        this.postanskiBroj = postanskiBroj;
     }
 
     public Grad() {

@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,6 +9,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class GradController {
@@ -15,6 +21,7 @@ public class GradController {
     public TextField fieldBrojStanovnika;
     public ChoiceBox<Drzava> choiceDrzava;
     public ObservableList<Drzava> listDrzave;
+    public TextField fieldPostanskiBroj;
     private Grad grad;
 
     public GradController(Grad grad, ArrayList<Drzava> drzave) {
@@ -28,6 +35,7 @@ public class GradController {
         if (grad != null) {
             fieldNaziv.setText(grad.getNaziv());
             fieldBrojStanovnika.setText(Integer.toString(grad.getBrojStanovnika()));
+            fieldPostanskiBroj.setText(Integer.toString(grad.getPostanskiBroj()));
             // choiceDrzava.getSelectionModel().select(grad.getDrzava());
             // ovo ne radi jer grad.getDrzava() nije identički jednak objekat kao član listDrzave
             for (Drzava drzava : listDrzave)
@@ -78,11 +86,52 @@ public class GradController {
 
         if (!sveOk) return;
 
-        if (grad == null) grad = new Grad();
-        grad.setNaziv(fieldNaziv.getText());
-        grad.setBrojStanovnika(Integer.parseInt(fieldBrojStanovnika.getText()));
-        grad.setDrzava(choiceDrzava.getValue());
-        Stage stage = (Stage) fieldNaziv.getScene().getWindow();
-        stage.close();
+        else {
+            try {
+                URL lokacija = new URL("http://c9.etf.unsa.ba/proba/postanskiBroj.php?postanskiBroj=" + fieldPostanskiBroj.getText());
+                fieldPostanskiBroj.getStyleClass().removeAll("poljeIspravno");
+                fieldPostanskiBroj.getStyleClass().removeAll("poljeNijeIspravno");
+                fieldPostanskiBroj.getStyleClass().add("poljeProvjeraUToku");
+                new Thread(() -> {
+                    String json = "", line = null;
+                    BufferedReader ulaz = null;
+                    try {
+                        ulaz = new BufferedReader(new InputStreamReader(lokacija.openStream(),
+                                StandardCharsets.UTF_8));
+                        while ((line = ulaz.readLine()) != null)
+                            json = json + line;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (!json.equals("OK")) {
+                        Platform.runLater(() -> {
+                            fieldPostanskiBroj.getStyleClass().removeAll("poljeProvjeraUToku");
+                            fieldPostanskiBroj.getStyleClass().add("poljeNijeIspravno");
+                            return;
+                        });
+
+                    } else {
+
+                        Platform.runLater(() -> {
+                            fieldPostanskiBroj.getStyleClass().removeAll("poljeProvjeraUToku");
+                            fieldPostanskiBroj.getStyleClass().add("poljeIspravno");
+                            if (grad == null) grad = new Grad();
+                            grad.setNaziv(fieldNaziv.getText());
+                            grad.setBrojStanovnika(Integer.parseInt(fieldBrojStanovnika.getText()));
+                            grad.setDrzava(choiceDrzava.getValue());
+                            grad.setPostanskiBroj(Integer.parseInt(fieldPostanskiBroj.getText()));
+                            Stage stage = (Stage) fieldNaziv.getScene().getWindow();
+                            stage.close();
+                        });
+                    }
+                }).start();
+            } catch (Exception e) {
+                // Do nothing
+            }
+        }
+
+
+
     }
 }
