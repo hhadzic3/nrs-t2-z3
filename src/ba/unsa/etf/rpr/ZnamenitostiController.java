@@ -65,10 +65,6 @@ public class ZnamenitostiController {
         alert.setHeaderText(res);
         /*alert.setContentText("You didn't select a file!");*/
 /*        alert.showAndWait();
-
-        Image im = new Image(res);
-
-        imgView.setImage(im);
 */
         imgView.imageProperty().bind(Bindings.createObjectBinding(() -> {
             File file = new File(res);
