@@ -35,28 +35,28 @@ public class GradController {
     }
 
     public void otvoriZ(ActionEvent actionEvent) {
-        /*Stage stage = new Stage();
+        Stage stage = new Stage();
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/znamenitosti.fxml"));
-            DrzavaController drzavaController = new DrzavaController(null, dao.gradovi());
-            loader.setController(drzavaController);
+            ZnamenitostiController zController = new ZnamenitostiController(/*null, dao.gradovi()*/);
+            loader.setController(zController);
             root = loader.load();
-            stage.setTitle("Država");
+            stage.setTitle("Znamenitosti");
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             stage.setResizable(true);
             stage.show();
-
+            /*
             stage.setOnHiding( event -> {
                 Drzava drzava = drzavaController.getDrzava();
                 if (drzava != null) {
                     dao.dodajDrzavu(drzava);
                     listGradovi.setAll(dao.gradovi());
                 }
-            } );
+            } );*/
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML

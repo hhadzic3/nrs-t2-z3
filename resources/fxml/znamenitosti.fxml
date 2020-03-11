@@ -9,8 +9,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import java.net.URL?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
-fx:controller="ba.unsa.etf.rpr.ZnamenitostiController">
+> <!--fx:controller="ba.unsa.etf.rpr.ZnamenitostiController"-->
+    <stylesheets>
+        <URL value="@/css/forme.css" />
+    </stylesheets>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.39996337890625" minWidth="10.0" prefWidth="156.59996337890624" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="512.800048828125" minWidth="10.0" prefWidth="443.00003662109367" />
@@ -26,17 +30,17 @@ fx:controller="ba.unsa.etf.rpr.ZnamenitostiController">
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <TextField id="fldNaziv" GridPane.columnIndex="1">
+      <TextField fx:id="fldNazivv" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <Button id="ok" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Spasi izmjene" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="ok" onAction="#clickOK" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Spasi izmjene" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </Button>
-      <ImageView fitHeight="252.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <Button id="btnOdabir" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Odaberi sliku" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <ImageView fx:id="imgView"  fitHeight="252.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <Button fx:id="btnOdabir" onAction="#clickOdabir" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Odaberi sliku" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
    </children>
 </GridPane>
