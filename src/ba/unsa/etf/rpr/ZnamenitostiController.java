@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
@@ -8,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
+import java.io.File;
 import java.util.Optional;
 
 
@@ -62,11 +64,23 @@ public class ZnamenitostiController {
         alert.setTitle("Information Dialog");
         alert.setHeaderText(res);
         /*alert.setContentText("You didn't select a file!");*/
-        alert.showAndWait();
+/*        alert.showAndWait();
 
         Image im = new Image(res);
 
         imgView.setImage(im);
+*/
+        imgView.imageProperty().bind(Bindings.createObjectBinding(() -> {
+            File file = new File(res);
+            if (file.exists()) {
+                return new Image(file.toURI().toString());
+            } else {
+                return null ;
+            }
+        }));
+
+
+
 
     }
 
