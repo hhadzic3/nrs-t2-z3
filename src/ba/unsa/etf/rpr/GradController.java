@@ -8,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -27,6 +29,8 @@ public class GradController {
     public ChoiceBox<Drzava> choiceDrzava;
     public ObservableList<Drzava> listDrzave;
     public TextField fieldPostanskiBroj;
+    public ListView listViewZnamenitosti;
+    public Button btnDodajZnamenitost;
     private Grad grad;
 
     public GradController(Grad grad, ArrayList<Drzava> drzave) {
@@ -73,6 +77,8 @@ public class GradController {
                     choiceDrzava.getSelectionModel().select(drzava);
         } else {
             choiceDrzava.getSelectionModel().selectFirst();
+            listViewZnamenitosti.setVisible(false);
+            btnDodajZnamenitost.setVisible(false);
         }
     }
 
