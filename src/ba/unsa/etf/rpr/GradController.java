@@ -42,6 +42,7 @@ public class GradController {
         Stage stage = new Stage();
         Parent root = null;
         try {
+            // todo: odraditi dodavanje u bazu
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/znamenitosti.fxml"));
             ZnamenitostiController zController = new ZnamenitostiController(/*null, dao.gradovi()*/);
             loader.setController(zController);
@@ -75,6 +76,8 @@ public class GradController {
             for (Drzava drzava : listDrzave)
                 if (drzava.getId() == grad.getDrzava().getId())
                     choiceDrzava.getSelectionModel().select(drzava);
+
+            // todo : ispisati sve znamenitosti TOG GRADA ( grad_id = grad)
         } else {
             choiceDrzava.getSelectionModel().selectFirst();
             listViewZnamenitosti.setVisible(false);

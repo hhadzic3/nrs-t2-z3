@@ -16,6 +16,8 @@ import java.util.Optional;
 public class ZnamenitostiController {
     public TextField fldNazivv;
     public ImageView imgView;
+    private Znamenitost znamenitost;
+    private String slika;
 
     public void clickOK(ActionEvent actionEvent) {
 
@@ -33,6 +35,11 @@ public class ZnamenitostiController {
 
         if (!sveOk) return;
 
+        // todo: dodati ako je sve ispravno u bazu
+        if (znamenitost == null) znamenitost = new Znamenitost();
+        znamenitost.setNaziv(fldNazivv.getText());
+        znamenitost.setSlika(slika);
+        znamenitost.setGrad(new Grad());
         Stage stage = (Stage) fldNazivv.getScene().getWindow();
         stage.close();
     }
@@ -59,13 +66,12 @@ public class ZnamenitostiController {
 
         Optional<String> result = dialog.showAndWait();
         String res = result.get();
-
+        slika = res;
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(res);
         /*alert.setContentText("You didn't select a file!");*/
-/*        alert.showAndWait();
-*/
+//        alert.showAndWait();
         imgView.imageProperty().bind(Bindings.createObjectBinding(() -> {
             File file = new File(res);
             if (file.exists()) {
@@ -75,14 +81,5 @@ public class ZnamenitostiController {
             }
         }));
 
-
-
-
     }
-
-
-
-
-
-
     }
