@@ -141,6 +141,8 @@ public class GeografijaDAO {
         }
     }
 
+
+    // todo : daj sve znamenitosti TOG GRADA
     private Znamenitost dajZnamenitost(int id ){
         try {
             dajZnamenitosiUpit.setInt(1, id);
@@ -158,6 +160,8 @@ public class GeografijaDAO {
         z.setGrad(dajGrad( rs.getInt(4) , new Drzava()));
         return z;
     }
+
+    // todo : daj sve znamenitosti TOG GRADA
 
     private Drzava dajDrzavuIzResultSeta(ResultSet rs) throws SQLException {
         Drzava d = new Drzava(rs.getInt(1), rs.getString(2), null);
@@ -235,16 +239,13 @@ public class GeografijaDAO {
         try {
             ResultSet rs = odrediIdZnamenitosti.executeQuery();
             int id = 1;
-            if (rs.next()) {
-                id = rs.getInt(1);
-            }
+            if (rs.next()) id = rs.getInt(1);
 
             dodajZnamenitostUpit.setInt(1, id);
             dodajZnamenitostUpit.setString(2, znamenitost.getNaziv());
             dodajZnamenitostUpit.setString(3, znamenitost.getSlika());
             dodajZnamenitostUpit.setInt(4, znamenitost.getGrad().getId());
-            dodajGradUpit.executeUpdate();
-
+            dodajZnamenitostUpit.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -18,6 +18,14 @@ public class ZnamenitostiController {
     public ImageView imgView;
     private Znamenitost znamenitost;
     private String slika;
+    private Grad grad;
+
+    public ZnamenitostiController(Grad grad) {
+        this.grad = grad;
+    }
+
+    public Znamenitost getZnamenitost() { return znamenitost;
+    }
 
     public void clickOK(ActionEvent actionEvent) {
 
@@ -39,7 +47,10 @@ public class ZnamenitostiController {
         if (znamenitost == null) znamenitost = new Znamenitost();
         znamenitost.setNaziv(fldNazivv.getText());
         znamenitost.setSlika(slika);
-        znamenitost.setGrad(new Grad());
+        znamenitost.setGrad(grad);
+        //Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        //alert.setHeaderText(slika + " " + grad.getId());
+        //alert.showAndWait();
         Stage stage = (Stage) fldNazivv.getScene().getWindow();
         stage.close();
     }
@@ -70,8 +81,8 @@ public class ZnamenitostiController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(res);
-        /*alert.setContentText("You didn't select a file!");*/
-//        alert.showAndWait();
+        //alert.setContentText("You didn't select a file!");
+        //alert.showAndWait();
         imgView.imageProperty().bind(Bindings.createObjectBinding(() -> {
             File file = new File(res);
             if (file.exists()) {

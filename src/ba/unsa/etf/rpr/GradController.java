@@ -13,7 +13,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,8 +31,11 @@ public class GradController {
     public ListView listViewZnamenitosti;
     public Button btnDodajZnamenitost;
     private Grad grad;
+    private GeografijaDAO dao;
 
     public GradController(Grad grad, ArrayList<Drzava> drzave) {
+
+        dao = GeografijaDAO.getInstance();
         this.grad = grad;
         listDrzave = FXCollections.observableArrayList(drzave);
     }
@@ -44,21 +46,21 @@ public class GradController {
         try {
             // todo: odraditi dodavanje u bazu
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/znamenitosti.fxml"));
-            ZnamenitostiController zController = new ZnamenitostiController(/*null, dao.gradovi()*/);
+            ZnamenitostiController zController = new ZnamenitostiController(grad);
             loader.setController(zController);
             root = loader.load();
             stage.setTitle("Znamenitosti");
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             stage.setResizable(true);
             stage.show();
-            /*
+
             stage.setOnHiding( event -> {
-                Drzava drzava = drzavaController.getDrzava();
-                if (drzava != null) {
-                    dao.dodajDrzavu(drzava);
-                    listGradovi.setAll(dao.gradovi());
+                Znamenitost zn = zController.getZnamenitost();
+                if (zn != null) {
+                    dao.dodajZnamenitost(zn);
+                    //listGradovi.setAll(dao.gradovi());
                 }
-            } );*/
+            } );
         } catch (IOException e) {
             e.printStackTrace();
         }
