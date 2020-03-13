@@ -33,11 +33,14 @@ public class GradController {
     private Grad grad;
     private GeografijaDAO dao;
 
+    public ObservableList<Znamenitost> listaZ;
+
     public GradController(Grad grad, ArrayList<Drzava> drzave) {
 
         dao = GeografijaDAO.getInstance();
         this.grad = grad;
         listDrzave = FXCollections.observableArrayList(drzave);
+        listaZ = FXCollections.observableArrayList(dao.dajZnamenitost(grad.getId()));
     }
 
     public void otvoriZ(ActionEvent actionEvent) {
@@ -58,7 +61,7 @@ public class GradController {
                 Znamenitost zn = zController.getZnamenitost();
                 if (zn != null) {
                     dao.dodajZnamenitost(zn);
-                    //listGradovi.setAll(dao.gradovi());
+                    listaZ.setAll(dao.dajZnamenitost(zn.getGrad().getId()));
                 }
             } );
         } catch (IOException e) {
@@ -80,6 +83,7 @@ public class GradController {
                     choiceDrzava.getSelectionModel().select(drzava);
 
             // todo : ispisati sve znamenitosti TOG GRADA ( grad_id = grad)
+            listViewZnamenitosti.setItems(listaZ);
         } else {
             choiceDrzava.getSelectionModel().selectFirst();
             listViewZnamenitosti.setVisible(false);
