@@ -36,11 +36,10 @@ public class GradController {
     public ObservableList<Znamenitost> listaZ;
 
     public GradController(Grad grad, ArrayList<Drzava> drzave) {
-
         dao = GeografijaDAO.getInstance();
         this.grad = grad;
         listDrzave = FXCollections.observableArrayList(drzave);
-        listaZ = FXCollections.observableArrayList(dao.dajZnamenitost(grad.getId()));
+//        listaZ = FXCollections.observableArrayList(dao.dajZnamenitost(grad.getId() , grad.getDrzava() ) );
     }
 
     public void otvoriZ(ActionEvent actionEvent) {
@@ -57,13 +56,13 @@ public class GradController {
             stage.setResizable(true);
             stage.show();
 
-            stage.setOnHiding( event -> {
+            /*stage.setOnHiding( event -> {
                 Znamenitost zn = zController.getZnamenitost();
                 if (zn != null) {
                     dao.dodajZnamenitost(zn);
-                    listaZ.setAll(dao.dajZnamenitost(zn.getGrad().getId()));
+                    listaZ.setAll(dao.dajZnamenitost(zn.getGrad().getId() , grad.getDrzava()));
                 }
-            } );
+            } );*/
         } catch (IOException e) {
             e.printStackTrace();
         }

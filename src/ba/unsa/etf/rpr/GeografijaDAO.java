@@ -38,7 +38,7 @@ public class GeografijaDAO {
 
         try {
             dajDrzavuUpit = conn.prepareStatement("SELECT * FROM drzava WHERE id=?");
-            dajGradUpit = conn.prepareStatement("SELECT * FROM grad WHERE id=?");
+            dajGradUpit = conn.prepareStatement("SELECT id ,naziv, broj_stanovnika, drzava, postanski_broj FROM grad WHERE id=?");
             obrisiGradoveZaDrzavuUpit = conn.prepareStatement("DELETE FROM grad WHERE drzava=?");
             obrisiDrzavuUpit = conn.prepareStatement("DELETE FROM drzava WHERE id=?");
             obrisiGradUpit = conn.prepareStatement("DELETE FROM grad WHERE id=?");
@@ -47,11 +47,11 @@ public class GeografijaDAO {
             dajGradoveUpit = conn.prepareStatement("SELECT * FROM grad ORDER BY broj_stanovnika DESC");
             dajDrzaveUpit = conn.prepareStatement("SELECT * FROM drzava ORDER BY naziv");
 
-            dodajGradUpit = conn.prepareStatement("INSERT INTO grad VALUES(?,?,?,?,?)");
             odrediIdGradaUpit = conn.prepareStatement("SELECT MAX(id)+1 FROM grad");
             dodajDrzavuUpit = conn.prepareStatement("INSERT INTO drzava VALUES(?,?,?)");
             odrediIdDrzaveUpit = conn.prepareStatement("SELECT MAX(id)+1 FROM drzava");
 
+            dodajGradUpit = conn.prepareStatement("INSERT INTO grad VALUES(?,?,?,?,?)");
             promijeniGradUpit = conn.prepareStatement("UPDATE grad SET naziv=?, broj_stanovnika=?, drzava=?, postanski_broj=? WHERE id=?");
 
             dajZnamenitosiUpit = conn.prepareStatement("SELECT * FROM Znamenitost where grad_id=?");
@@ -113,9 +113,6 @@ public class GeografijaDAO {
         }
     }
 
-    private Grad dajGradIzResultSeta(ResultSet rs, Drzava d) throws SQLException {
-        return new Grad(rs.getInt(1), rs.getString(2), rs.getInt(3), d , rs.getInt(4));
-    }
 
     private Drzava dajDrzavu(int id) {
         try {
@@ -141,6 +138,10 @@ public class GeografijaDAO {
         }
     }
 
+    private Grad dajGradIzResultSeta(ResultSet rs, Drzava d) throws SQLException {
+        return new Grad(rs.getInt(1), rs.getString(2), rs.getInt(3), d , rs.getInt(5));
+    }
+
     public void obrisiDrzavu(String nazivDrzave) {
         try {
             nadjiDrzavuUpit.setString(1, nazivDrzave);
@@ -158,24 +159,24 @@ public class GeografijaDAO {
         }
     }
     // todo : daj sve znamenitosti TOG GRADA
-    public Znamenitost dajZnamenitost(int grad_id ){
+   /* public Znamenitost dajZnamenitost(int grad_id , Drzava d){
         try {
             dajZnamenitosiUpit.setInt(1, grad_id);
             ResultSet rs = dajZnamenitosiUpit.executeQuery();
             if (!rs.next()) return null;
-            return dajZnamenitostIzResultSeta(rs);
+            return dajZnamenitostIzResultSeta(rs , d);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    private Znamenitost dajZnamenitostIzResultSeta(ResultSet rs) throws SQLException {
+    private Znamenitost dajZnamenitostIzResultSeta(ResultSet rs, Drzava d) throws SQLException {
         Znamenitost z = new Znamenitost(rs.getInt(1) , rs.getString(2), rs.getString(3), null);
-        z.setGrad(dajGrad( rs.getInt(4) , new Drzava()));
+        z.setGrad(dajGrad( rs.getInt(4) , d));
         return z;
     }
-
+*/
     // todo : daj sve znamenitosti TOG GRADA
 
     private Drzava dajDrzavuIzResultSeta(ResultSet rs) throws SQLException {
@@ -276,7 +277,6 @@ public class GeografijaDAO {
             promijeniGradUpit.setInt(4, grad.getId());
             promijeniGradUpit.setInt(5, grad.getPostanskiBroj());
             promijeniGradUpit.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

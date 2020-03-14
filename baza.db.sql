@@ -25,8 +25,10 @@ INSERT INTO `drzava` VALUES (3,'Austrija',3);
 CREATE TABLE IF NOT EXISTS `Znamenitost` (
       `id`	INTEGER,
       `naziv`	TEXT,
+      `slika`	TEXT,
       `grad_id`	INTEGER,
       FOREIGN KEY(`grad_id`) REFERENCES `grad`,
       PRIMARY KEY(`id`)
 );
+INSERT INTO `Znamenitost` VALUES (1,'Belva' , 'C:\Users\HARUN\Desktop\Napredni RS\Tut\rpr19-2parc-1t\rpr19-2parc-1t\resources\img\img1.jpg',5);
 COMMIT;
