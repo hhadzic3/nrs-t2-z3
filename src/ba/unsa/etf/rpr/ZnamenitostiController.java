@@ -2,6 +2,9 @@ package ba.unsa.etf.rpr;
 
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
@@ -9,7 +12,12 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Optional;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 
 public class ZnamenitostiController {
@@ -66,6 +74,36 @@ public class ZnamenitostiController {
             fldNazivv.getStyleClass().add("poljeIspravno");
         }
         if (!sveOk) return;
+
+
+        Stage stage = new Stage();
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/pretraga.fxml"));
+            PretragaContoller pretragaController = new PretragaContoller();
+            loader.setController(pretragaController);
+            root = loader.load();
+            stage.setTitle("Traži");
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setResizable(true);
+            stage.show();
+
+            stage.setOnHiding(event -> {
+                slika = pretragaController.getSlika();
+                try {
+                    imgView.setImage(new Image(new FileInputStream(slika)));
+                } catch (FileNotFoundException e) {
+                    //..
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+       // DialogInput();
+    }
+
+    private void DialogInput() {
 
         TextInputDialog dialog = new TextInputDialog("Tran");
 

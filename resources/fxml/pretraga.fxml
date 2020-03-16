@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="ba.unsa.etf.rpr.PretragaContoller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+        <!--fx:controller="ba.unsa.etf.rpr.PretragaContoller"-->
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -31,7 +31,7 @@ fx:controller="ba.unsa.etf.rpr.PretragaContoller">
             </Label>
             <TextField fx:id="fldTrazi" GridPane.columnIndex="1">
                <GridPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets />
                </GridPane.margin>
             </TextField>
             <Button fx:id="trazi" mnemonicParsing="false" onAction="#trazi" text="Traži" GridPane.columnIndex="2">
@@ -46,10 +46,17 @@ fx:controller="ba.unsa.etf.rpr.PretragaContoller">
       </GridPane>
    </top>
    <center>
-      <ListView fx:id="lista" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ListView fx:id="lista" prefHeight="301.0" prefWidth="591.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin>
       </ListView>
    </center>
+   <bottom>
+      <Button mnemonicParsing="false" text="OK" onAction="#ClickOk" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
 </BorderPane>
