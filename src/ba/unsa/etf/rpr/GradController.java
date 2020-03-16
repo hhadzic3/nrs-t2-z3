@@ -28,7 +28,7 @@ public class GradController {
     public ChoiceBox<Drzava> choiceDrzava;
     public ObservableList<Drzava> listDrzave;
     public TextField fieldPostanskiBroj;
-    public ListView listViewZnamenitosti;
+    public ListView<Znamenitost> listViewZnamenitosti;
     public Button btnDodajZnamenitost;
     private Grad grad;
     private GeografijaDAO dao;
@@ -39,7 +39,9 @@ public class GradController {
         dao = GeografijaDAO.getInstance();
         this.grad = grad;
         listDrzave = FXCollections.observableArrayList(drzave);
-//        listaZ = FXCollections.observableArrayList(dao.dajZnamenitost(grad.getId() , grad.getDrzava() ) );
+
+        if (grad == null) listaZ = FXCollections.observableArrayList();
+        else listaZ = FXCollections.observableArrayList( grad.getZnamenitosti() );
     }
 
     public void otvoriZ(ActionEvent actionEvent) {
@@ -56,13 +58,15 @@ public class GradController {
             stage.setResizable(true);
             stage.show();
 
-            /*stage.setOnHiding( event -> {
+            stage.setOnHiding( event -> {
                 Znamenitost zn = zController.getZnamenitost();
                 if (zn != null) {
                     dao.dodajZnamenitost(zn);
-                    listaZ.setAll(dao.dajZnamenitost(zn.getGrad().getId() , grad.getDrzava()));
+                    grad.getZnamenitosti().add(zn);
+                    listaZ.setAll(grad.getZnamenitosti());
+                    listViewZnamenitosti.refresh();
                 }
-            } );*/
+            } );
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,13 +85,13 @@ public class GradController {
                 if (drzava.getId() == grad.getDrzava().getId())
                     choiceDrzava.getSelectionModel().select(drzava);
 
-            // todo : ispisati sve znamenitosti TOG GRADA ( grad_id = grad)
-            listViewZnamenitosti.setItems(listaZ);
         } else {
             choiceDrzava.getSelectionModel().selectFirst();
             listViewZnamenitosti.setVisible(false);
             btnDodajZnamenitost.setVisible(false);
         }
+            // todo : ispisati sve znamenitosti TOG GRADA ( grad_id = grad)
+            listViewZnamenitosti.setItems(listaZ);
     }
 
     public Grad getGrad() {

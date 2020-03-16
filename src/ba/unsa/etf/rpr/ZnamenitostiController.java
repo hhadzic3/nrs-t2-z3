@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
-
 import java.io.File;
 import java.util.Optional;
 
@@ -43,7 +42,7 @@ public class ZnamenitostiController {
 
         if (!sveOk) return;
 
-        // todo: dodati ako je sve ispravno u bazu
+        // dodati ako je sve ispravno u bazu
         if (znamenitost == null) znamenitost = new Znamenitost();
         znamenitost.setNaziv(fldNazivv.getText());
         znamenitost.setSlika(slika);
@@ -78,11 +77,13 @@ public class ZnamenitostiController {
         Optional<String> result = dialog.showAndWait();
         String res = result.get();
         slika = res;
+        /*
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(res);
-        //alert.setContentText("You didn't select a file!");
-        //alert.showAndWait();
+        alert.setContentText("You didn't select a file!");
+        alert.showAndWait();
+        */
         imgView.imageProperty().bind(Bindings.createObjectBinding(() -> {
             File file = new File(res);
             if (file.exists()) {
@@ -91,6 +92,5 @@ public class ZnamenitostiController {
                 return null ;
             }
         }));
-
     }
-    }
+}

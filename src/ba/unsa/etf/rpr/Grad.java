@@ -1,11 +1,14 @@
 package ba.unsa.etf.rpr;
 
+import java.util.ArrayList;
+
 public class Grad {
     private int id;
     private String naziv;
     private int brojStanovnika;
     private Drzava drzava;
     private int postanskiBroj;
+    private ArrayList<Znamenitost> znamenitosti;
 
     public int getPostanskiBroj() {
         return postanskiBroj;
@@ -15,12 +18,21 @@ public class Grad {
         this.postanskiBroj = postanskiBroj;
     }
 
+    public ArrayList<Znamenitost> getZnamenitosti() {
+        return znamenitosti;
+    }
+
+    public void setZnamenitosti(ArrayList<Znamenitost> znamenitosti) {
+        this.znamenitosti = znamenitosti;
+    }
+
     public Grad(int id, String naziv, int brojStanovnika, Drzava drzava , int postanskiBroj) {
         this.id = id;
         this.naziv = naziv;
         this.brojStanovnika = brojStanovnika;
         this.drzava = drzava;
         this.postanskiBroj = postanskiBroj;
+        znamenitosti = new ArrayList<Znamenitost>();
     }
 
     public Grad() {

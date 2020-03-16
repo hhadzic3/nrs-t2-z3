@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS `Znamenitost` (
       `naziv`	TEXT,
       `slika`	TEXT,
       `grad_id`	INTEGER,
-      FOREIGN KEY(`grad_id`) REFERENCES `grad`,
       PRIMARY KEY(`id`)
 );
 INSERT INTO `Znamenitost` VALUES (1,'Belva' , 'C:\Users\HARUN\Desktop\Napredni RS\Tut\rpr19-2parc-1t\rpr19-2parc-1t\resources\img\img1.jpg',5);

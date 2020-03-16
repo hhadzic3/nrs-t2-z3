@@ -57,6 +57,7 @@ public class GeografijaDAO {
             dajZnamenitosiUpit = conn.prepareStatement("SELECT * FROM Znamenitost where grad_id=?");
             dodajZnamenitostUpit = conn.prepareStatement("INSERT into Znamenitost values(?,?,?,?)");
             odrediIdZnamenitosti = conn.prepareStatement("SELECT MAX(id)+1 FROM Znamenitost");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -138,9 +139,32 @@ public class GeografijaDAO {
         }
     }
 
+    // todo : daj sve znamenitosti TOG GRADA
     private Grad dajGradIzResultSeta(ResultSet rs, Drzava d) throws SQLException {
-        return new Grad(rs.getInt(1), rs.getString(2), rs.getInt(3), d , rs.getInt(5));
+        Grad g =  new Grad(rs.getInt(1), rs.getString(2), rs.getInt(3), d , rs.getInt(5));
+        g.setZnamenitosti(dajZnamenitosiUpit(g));
+        return g;
     }
+
+    private ArrayList<Znamenitost> dajZnamenitosiUpit(Grad g) {
+        ArrayList<Znamenitost> rezultat = new ArrayList<>();
+        try {
+            dajZnamenitosiUpit.setInt(1, g.getId());
+            ResultSet rs = dajZnamenitosiUpit.executeQuery();
+            while (rs.next()) {
+                Znamenitost znamenitost = dajZnamenitostIzResultSeta(rs, g);
+                rezultat.add(znamenitost);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rezultat;
+    }
+
+    private Znamenitost dajZnamenitostIzResultSeta(ResultSet rs, Grad g) throws SQLException {
+        return new Znamenitost(rs.getInt(1), rs.getString(2), rs.getString(3), g);
+    }
+    // todo : daj sve znamenitosti TOG GRADA
 
     public void obrisiDrzavu(String nazivDrzave) {
         try {
@@ -158,26 +182,7 @@ public class GeografijaDAO {
             e.printStackTrace();
         }
     }
-    // todo : daj sve znamenitosti TOG GRADA
-   /* public Znamenitost dajZnamenitost(int grad_id , Drzava d){
-        try {
-            dajZnamenitosiUpit.setInt(1, grad_id);
-            ResultSet rs = dajZnamenitosiUpit.executeQuery();
-            if (!rs.next()) return null;
-            return dajZnamenitostIzResultSeta(rs , d);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
-    private Znamenitost dajZnamenitostIzResultSeta(ResultSet rs, Drzava d) throws SQLException {
-        Znamenitost z = new Znamenitost(rs.getInt(1) , rs.getString(2), rs.getString(3), null);
-        z.setGrad(dajGrad( rs.getInt(4) , d));
-        return z;
-    }
-*/
-    // todo : daj sve znamenitosti TOG GRADA
 
     private Drzava dajDrzavuIzResultSeta(ResultSet rs) throws SQLException {
         Drzava d = new Drzava(rs.getInt(1), rs.getString(2), null);
