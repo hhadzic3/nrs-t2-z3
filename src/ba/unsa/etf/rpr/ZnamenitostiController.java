@@ -55,9 +55,6 @@ public class ZnamenitostiController {
         znamenitost.setNaziv(fldNazivv.getText());
         znamenitost.setSlika(slika);
         znamenitost.setGrad(grad);
-        //Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        //alert.setHeaderText(slika + " " + grad.getId());
-        //alert.showAndWait();
         Stage stage = (Stage) fldNazivv.getScene().getWindow();
         stage.close();
     }
@@ -75,32 +72,8 @@ public class ZnamenitostiController {
         }
         if (!sveOk) return;
 
-
-        Stage stage = new Stage();
-        Parent root;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/pretraga.fxml"));
-            PretragaContoller pretragaController = new PretragaContoller();
-            loader.setController(pretragaController);
-            root = loader.load();
-            stage.setTitle("Traži");
-            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-            stage.setResizable(true);
-            stage.show();
-
-            stage.setOnHiding(event -> {
-                slika = pretragaController.getSlika();
-                try {
-                    imgView.setImage(new Image(new FileInputStream(slika)));
-                } catch (FileNotFoundException e) {
-                    //..
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-       // DialogInput();
+        DialogInput();
+        // Pretraga();
     }
 
     private void DialogInput() {
@@ -131,4 +104,31 @@ public class ZnamenitostiController {
             }
         }));
     }
+
+    private void Pretraga() {
+        Stage stage = new Stage();
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/pretraga.fxml"));
+            PretragaContoller pretragaController = new PretragaContoller();
+            loader.setController(pretragaController);
+            root = loader.load();
+            stage.setTitle("Traži");
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setResizable(true);
+            stage.show();
+
+            stage.setOnHiding(event -> {
+                slika = pretragaController.getSlika();
+                try {
+                    imgView.setImage(new Image(new FileInputStream(slika)));
+                } catch (FileNotFoundException e) {
+                    //..
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
