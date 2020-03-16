@@ -139,14 +139,14 @@ public class GeografijaDAO {
         }
     }
 
-    // todo : daj sve znamenitosti TOG GRADA
+    // daj sve znamenitosti TOG GRADA {
     private Grad dajGradIzResultSeta(ResultSet rs, Drzava d) throws SQLException {
         Grad g =  new Grad(rs.getInt(1), rs.getString(2), rs.getInt(3), d , rs.getInt(5));
-        g.setZnamenitosti(dajZnamenitosiUpit(g));
+        g.setZnamenitosti(dajListuZnamenitosi(g));
         return g;
     }
 
-    private ArrayList<Znamenitost> dajZnamenitosiUpit(Grad g) {
+    private ArrayList<Znamenitost> dajListuZnamenitosi(Grad g) {
         ArrayList<Znamenitost> rezultat = new ArrayList<>();
         try {
             dajZnamenitosiUpit.setInt(1, g.getId());
@@ -164,7 +164,7 @@ public class GeografijaDAO {
     private Znamenitost dajZnamenitostIzResultSeta(ResultSet rs, Grad g) throws SQLException {
         return new Znamenitost(rs.getInt(1), rs.getString(2), rs.getString(3), g);
     }
-    // todo : daj sve znamenitosti TOG GRADA
+    // daj sve znamenitosti TOG GRADA }
 
     public void obrisiDrzavu(String nazivDrzave) {
         try {
@@ -276,11 +276,12 @@ public class GeografijaDAO {
 
     public void izmijeniGrad(Grad grad) {
         try {
+            // pazi na redosljed (zamjenio sam 4 i 5) !!!!!!!
             promijeniGradUpit.setString(1, grad.getNaziv());
             promijeniGradUpit.setInt(2, grad.getBrojStanovnika());
             promijeniGradUpit.setInt(3, grad.getDrzava().getId());
-            promijeniGradUpit.setInt(4, grad.getId());
-            promijeniGradUpit.setInt(5, grad.getPostanskiBroj());
+            promijeniGradUpit.setInt(4, grad.getPostanskiBroj());
+            promijeniGradUpit.setInt(5, grad.getId());
             promijeniGradUpit.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

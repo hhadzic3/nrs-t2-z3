@@ -48,7 +48,6 @@ public class GradController {
         Stage stage = new Stage();
         Parent root = null;
         try {
-            // todo: odraditi dodavanje u bazu
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/znamenitosti.fxml"));
             ZnamenitostiController zController = new ZnamenitostiController(grad);
             loader.setController(zController);
@@ -58,6 +57,7 @@ public class GradController {
             stage.setResizable(true);
             stage.show();
 
+            // odraditi dodavanje u bazu
             stage.setOnHiding( event -> {
                 Znamenitost zn = zController.getZnamenitost();
                 if (zn != null) {
@@ -90,7 +90,7 @@ public class GradController {
             listViewZnamenitosti.setVisible(false);
             btnDodajZnamenitost.setVisible(false);
         }
-            // todo : ispisati sve znamenitosti TOG GRADA ( grad_id = grad)
+            // ispisati sve znamenitosti TOG GRADA ( grad_id = grad)
             listViewZnamenitosti.setItems(listaZ);
     }
 
