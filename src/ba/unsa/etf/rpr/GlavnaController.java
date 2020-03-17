@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
 
 import java.io.File;
 import java.io.IOException;
@@ -143,7 +144,11 @@ public class GlavnaController {
 
 
     public void actionIzvjestaj(ActionEvent actionEvent) {
-
+        try {
+            new GradoviReport().showReport(dao.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
     }
 
     // Metoda za potrebe testova, vraća bazu u polazno stanje
