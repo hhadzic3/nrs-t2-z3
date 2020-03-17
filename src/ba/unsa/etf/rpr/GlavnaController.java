@@ -141,6 +141,11 @@ public class GlavnaController {
         }
     }
 
+
+    public void actionIzvjestaj(ActionEvent actionEvent) {
+
+    }
+
     // Metoda za potrebe testova, vraća bazu u polazno stanje
     public void resetujBazu() {
         GeografijaDAO.removeInstance();
