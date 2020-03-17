@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="gradovi" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1f690a3-5977-4467-85f8-6b0bcd5b7210">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+			  name="gradovi" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1f690a3-5977-4467-85f8-6b0bcd5b7210">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
-	<style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
-	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
-	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
-	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Title" fontName="Liberation Sans" fontSize="26" isBold="true"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Liberation Sans" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Liberation Sans" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Liberation Sans" fontSize="12"/>
+	<parameter name = "reportsDirPath" class = "java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[Select g.id, g.naziv , g.broj_stanovnika, d.naziv naziv_drzave 
-from grad g, drzava d
-where g.drzava = d.id
-order by g.broj_stanovnika desc]]>
+		<![CDATA[Select g.id, g.naziv , g.broj_stanovnika, d.naziv naziv_drzave
+				from grad g, drzava d
+				where g.drzava = d.id
+				order by g.broj_stanovnika desc]]>
 	</queryString>
 	<field name="id" class="java.lang.Object">
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
@@ -39,7 +43,7 @@ order by g.broj_stanovnika desc]]>
 		<band height="70" splitType="Stretch">
 			<image>
 				<reportElement x="275" y="0" width="300" height="64" uuid="363fa2ad-70fc-43cb-9062-e6c62c7f48fc"/>
-				<imageExpression><![CDATA["leaf_banner_gray.png"]]></imageExpression>
+				<imageExpression><![CDATA[new File($P{reportsDirPath},"leaf_banner_gray.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="6f9c1004-6140-4588-9c4f-d75824835765"/>

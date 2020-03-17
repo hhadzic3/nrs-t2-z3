@@ -2,16 +2,17 @@ package ba.unsa.etf.rpr;
 
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.swing.JRViewer;
-
 import javax.swing.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class GradoviReport extends JFrame {
+
     public void showReport(Connection conn) throws JRException {
-        String reportSrcFile = getClass().getResource("/report/gradovi.jrxml").getFile();
-        String reportsDir = getClass().getResource("/report/").getFile();
+        String reportSrcFile = getClass().getResource("/reports/gradovi.jrxml").getFile(); // fileNotFindException
+        String reportsDir = getClass().getResource("/reports/").getFile();
 
         JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
         // Fields for resources path
