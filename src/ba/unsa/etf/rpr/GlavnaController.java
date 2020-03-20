@@ -156,7 +156,7 @@ public class GlavnaController {
     }
 
 
-    public void odabirJezika(ActionEvent actionEvent) {
+    public void odabirJezika(ActionEvent actionEvent) throws IOException {
         List<String> options = new ArrayList<>();
         options.add("en");
         options.add("bs");
@@ -167,10 +167,24 @@ public class GlavnaController {
 
         Optional<String> choice = dialog.showAndWait();
         String res = choice.get();
-        if (res.equals("en"))
+        if (res.equals("en")) {
             Locale.setDefault(new Locale("en", "US"));
-        else Locale.setDefault(new Locale("bs", "BA"));
+            ucitajScenu();
+        }
 
+        else {
+            Locale.setDefault(new Locale("bs", "BA"));
+            ucitajScenu();
+        }
+
+    }
+
+    public void ucitajScenu() throws IOException {
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        Stage stage = (Stage) tableViewGradovi.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/glavna.fxml" ), bundle);
+        loader.setController(this);
+        stage.setScene(new Scene(loader.load()));
     }
 
     // Metoda za potrebe testova, vraća bazu u polazno stanje
