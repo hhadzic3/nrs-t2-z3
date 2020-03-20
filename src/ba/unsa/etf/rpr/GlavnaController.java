@@ -4,21 +4,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import net.sf.jasperreports.engine.JRException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.*;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -50,7 +49,8 @@ public class GlavnaController {
         Stage stage = new Stage();
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/grad.fxml"));
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/grad.fxml"), bundle);
             GradController gradController = new GradController(null, dao.drzave());
             loader.setController(gradController);
             root = loader.load();
@@ -76,7 +76,9 @@ public class GlavnaController {
         Stage stage = new Stage();
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/drzava.fxml"));
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/drzava.fxml") , bundle);
             DrzavaController drzavaController = new DrzavaController(null, dao.gradovi());
             loader.setController(drzavaController);
             root = loader.load();
@@ -104,7 +106,9 @@ public class GlavnaController {
         Stage stage = new Stage();
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/grad.fxml"));
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/grad.fxml"), bundle);
             GradController gradController = new GradController(grad, dao.drzave());
             loader.setController(gradController);
             root = loader.load();
@@ -149,6 +153,24 @@ public class GlavnaController {
         } catch (JRException e1) {
             e1.printStackTrace();
         }
+    }
+
+
+    public void odabirJezika(ActionEvent actionEvent) {
+        List<String> options = new ArrayList<>();
+        options.add("en");
+        options.add("bs");
+
+        ChoiceDialog<String> dialog = new ChoiceDialog<>(options.get(0), options);
+        dialog.setHeaderText("Odaberite zeljeni jezik.");
+        dialog.setTitle("Jezik?");
+
+        Optional<String> choice = dialog.showAndWait();
+        String res = choice.get();
+        if (res.equals("en"))
+            Locale.setDefault(new Locale("en", "US"));
+        else Locale.setDefault(new Locale("bs", "BA"));
+
     }
 
     // Metoda za potrebe testova, vraća bazu u polazno stanje

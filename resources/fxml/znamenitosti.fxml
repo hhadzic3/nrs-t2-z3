@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,9 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<?import java.net.URL?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
-> <!--fx:controller="ba.unsa.etf.rpr.ZnamenitostiController"-->
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="ba.unsa.etf.rpr.ZnamenitostiController"-->
     <stylesheets>
         <URL value="@/css/forme.css" />
     </stylesheets>
@@ -25,7 +24,7 @@
     <RowConstraints maxHeight="126.20001831054691" minHeight="6.199987792968784" prefHeight="8.600012207031284" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label prefHeight="19.0" prefWidth="50.0" text="Naziv:" GridPane.halignment="CENTER">
+      <Label prefHeight="19.0" prefWidth="50.0" text="%naziv" GridPane.halignment="CENTER">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -35,12 +34,12 @@
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="ok" onAction="#clickOK" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Spasi izmjene" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="ok" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickOK" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </Button>
-      <ImageView fx:id="imgView"  fitHeight="252.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <Button fx:id="btnOdabir" onAction="#clickOdabir" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Odaberi sliku" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <ImageView fx:id="imgView" fitHeight="252.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <Button fx:id="btnOdabir" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#clickOdabir" text="%odaberi_sliku" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
    </children>
 </GridPane>

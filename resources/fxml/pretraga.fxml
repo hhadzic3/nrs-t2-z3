@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
         <!--fx:controller="ba.unsa.etf.rpr.PretragaContoller"-->
    <top>
       <GridPane BorderPane.alignment="CENTER">
@@ -24,7 +23,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Uzorak:">
+            <Label text="%uzorak">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -34,7 +33,7 @@
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <Button fx:id="trazi" mnemonicParsing="false" onAction="#trazi" text="Traži" GridPane.columnIndex="2">
+            <Button fx:id="trazi" mnemonicParsing="false" onAction="#trazi" text="%trazi" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
@@ -53,7 +52,7 @@
       </ListView>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" text="OK" onAction="#ClickOk" BorderPane.alignment="CENTER">
+      <Button mnemonicParsing="false" onAction="#ClickOk" text="OK" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" />
          </BorderPane.margin>
