@@ -1,5 +1,5 @@
 package ba.unsa.etf.rpr;
-
+/*
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -100,7 +100,7 @@ class GradControllerTest {
         // Sada je i broj stanovnika validan, forma se zatvorila
         assertTrue(theStage.isShowing());
     }
-/*
+
     @Test
     public void testVracanjeGrada(FxRobot robot) {
         // Upisujemo grad
@@ -119,5 +119,5 @@ class GradControllerTest {
         assertEquals(350000, sarajevo.getBrojStanovnika());
         assertEquals("Francuska", sarajevo.getDrzava().getNaziv());
 
-    }*/
-}
+    }
+}*/
