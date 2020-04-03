@@ -20,7 +20,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="nrs-t2-z1" target="8" />
+      <module name="nrs-t2-z1" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
